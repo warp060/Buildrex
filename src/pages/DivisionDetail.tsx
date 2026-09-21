@@ -1,22 +1,74 @@
 import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { Code2, Radio, Calendar, Rocket, ArrowLeft, CheckCircle2 } from 'lucide-react'
+import { 
+  Code2, Radio, Calendar, Rocket, ArrowLeft, CheckCircle2,
+  Globe, Server, ShieldCheck, Mail, Cloud, Bot, Layout, LayoutDashboard, Wrench, Lightbulb, Compass
+} from 'lucide-react'
 import ScrollReveal from '../components/ScrollReveal'
 
 const divisionData: Record<string, any> = {
   tech: {
     name: 'Buildrex Tech',
-    tagline: 'Technology & Development',
+    tagline: 'Technology & Digital Infrastructure',
     icon: Code2,
-    description: 'Buildrex Tech is our technology division dedicated to building software, websites, AI-powered solutions, and minimum viable products. We partner with startups, entrepreneurs, and businesses to transform ideas into fully functional digital products.',
-    longDescription: 'From rapid prototyping to full-scale development, our tech team brings deep expertise across modern web technologies, artificial intelligence, and software engineering. We don\'t just write code — we architect solutions that scale.',
+    description: 'Buildrex Tech is our technology division providing end-to-end digital solutions — from domain registration, cloud hosting, and email infrastructure to bespoke UI dashboards, AI chatbots, and startup technology planning.',
+    longDescription: 'Whether you are launching your first startup or modernizing existing operations, Buildrex Tech delivers the full-stack infrastructure, design, and intelligence your business needs to scale seamlessly.',
     services: [
-      { title: 'Website Development', description: 'Modern, responsive, high-performance websites built with cutting-edge technology stacks.' },
-      { title: 'MVP Development', description: 'Rapid prototyping and minimum viable product development for startups and new ventures.' },
-      { title: 'AI Solutions', description: 'Custom AI and machine learning solutions tailored to solve specific business challenges.' },
-      { title: 'Software Engineering', description: 'End-to-end software development from architecture design to deployment and maintenance.' },
-      { title: 'Mobile Applications', description: 'Cross-platform mobile apps that deliver seamless user experiences.' },
-      { title: 'Technical Consulting', description: 'Strategic technology guidance to help businesses make informed technical decisions.' },
+      {
+        title: 'Domain Registration Assistance',
+        description: 'Expert guidance and setup for acquiring your custom domain, configuring DNS zone records, SSL security, and privacy protection.',
+        icon: Globe,
+      },
+      {
+        title: 'Website Hosting Setup',
+        description: 'High-speed cloud server provisioning, SSL certificate installation, CDN integration, and optimized deployment architectures.',
+        icon: Server,
+      },
+      {
+        title: 'Website Hosting Management',
+        description: '24/7 server health monitoring, automated backups, security patching, and ongoing performance tuning for continuous uptime.',
+        icon: ShieldCheck,
+      },
+      {
+        title: 'Email Setup',
+        description: 'Custom domain business email routing, secure inbox creation, and strict SPF, DKIM, and DMARC verification for optimal deliverability.',
+        icon: Mail,
+      },
+      {
+        title: 'Google Workspace Setup',
+        description: 'Seamless deployment and administration of Google Workspace (Gmail, Drive, Meet, Calendar) customized for your team’s workflows.',
+        icon: Cloud,
+      },
+      {
+        title: 'AI Chatbot',
+        description: 'Intelligent conversational AI agents powered by modern LLMs to automate customer inquiries, qualify leads, and provide 24/7 engagement.',
+        icon: Bot,
+      },
+      {
+        title: 'Landing Page UI',
+        description: 'High-converting, visually striking, and responsive landing pages crafted to captivate visitors and accelerate product adoption.',
+        icon: Layout,
+      },
+      {
+        title: 'Dashboard UI',
+        description: 'Intuitive, scalable SaaS dashboards and admin portal interfaces built with modular component architectures and clean UX patterns.',
+        icon: LayoutDashboard,
+      },
+      {
+        title: 'Website Maintenance',
+        description: 'Proactive maintenance routines, framework and plugin updates, bug fixing, speed optimization, and regular content adjustments.',
+        icon: Wrench,
+      },
+      {
+        title: 'Technology Consultation',
+        description: 'Strategic technology advisory on architecture design, tool selection, modern tech stacks, and digital transformation roadmaps.',
+        icon: Lightbulb,
+      },
+      {
+        title: 'Startup Technology Planning',
+        description: 'End-to-end technical roadmapping, MVP scoping, feasibility analysis, and architecture blueprints tailored for early-stage founders.',
+        icon: Compass,
+      },
     ],
     status: 'active',
   },
@@ -145,21 +197,24 @@ export default function DivisionDetail() {
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {division.services.map((service: any, index: number) => (
-              <ScrollReveal key={index} delay={index * 0.06} distance={16}>
-                <div className="p-6 rounded-xl bg-white border border-navy-100/90 card-hover-lift h-full group">
-                  <div className="w-9 h-9 rounded-lg bg-navy-50 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                    <CheckCircle2 size={20} className="text-navy-600" />
+            {division.services.map((service: any, index: number) => {
+              const ServiceIcon = service.icon || CheckCircle2
+              return (
+                <ScrollReveal key={index} delay={index * 0.05} distance={16}>
+                  <div className="p-6 rounded-xl bg-white border border-navy-100/90 card-hover-lift h-full group flex flex-col">
+                    <div className="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:bg-navy-900 group-hover:text-white text-navy-600">
+                      <ServiceIcon size={20} className="transition-colors duration-300" />
+                    </div>
+                    <h3 className="mt-4 text-lg font-bold text-navy-900 font-[family-name:var(--font-heading)]">
+                      {service.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-navy-900/60 leading-relaxed flex-1">
+                      {service.description}
+                    </p>
                   </div>
-                  <h3 className="mt-4 text-lg font-bold text-navy-900 font-[family-name:var(--font-heading)]">
-                    {service.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-navy-900/60 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-              </ScrollReveal>
-            ))}
+                </ScrollReveal>
+              )
+            })}
           </div>
         </div>
       </section>

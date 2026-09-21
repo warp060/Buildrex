@@ -20,7 +20,6 @@ const navLinks = [
   { label: 'Home', path: '/', number: '01', desc: 'Overview & Ecosystem' },
   { label: 'About', path: '/about', number: '02', desc: 'Mission & Council' },
   { label: 'Divisions', path: '/divisions', number: '03', desc: '4 Specialized Verticals' },
-  { label: 'Contact', path: '/contact', number: '04', desc: "Let's Build Together" },
 ]
 
 const quickDivisions = [
@@ -119,7 +118,11 @@ export default function Navbar() {
               })}
               <Link
                 to="/contact"
-                className="px-5 py-2.5 bg-navy-900 text-white text-sm font-medium rounded-lg btn-glow focus:outline-none"
+                className={`px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none ${
+                  location.pathname === '/contact'
+                    ? 'bg-navy-950 text-white ring-2 ring-blue-500/40 shadow-[0_0_20px_rgba(59,130,246,0.25)]'
+                    : 'bg-navy-900 hover:bg-navy-800 text-white btn-glow'
+                }`}
               >
                 Contact Us
               </Link>

@@ -33,21 +33,44 @@ export default function Contact() {
     if (!validate()) return
 
     setStatus('loading')
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-      if (res.ok) {
-        setStatus('success')
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
-      } else {
-        setStatus('error')
+
+    const sheetWebhookUrl =
+      import.meta.env.VITE_EXCEL_SHEET_WEBHOOK_URL ||
+      'https://script.google.com/macros/s/AKfycbxgY36UQM-CK_KJPn3Njx3YFxbi91V7nyqZW9W9kIuAwP50d7r6AbofwiOtywfkUVx3/exec'
+
+    if (sheetWebhookUrl && sheetWebhookUrl.trim()) {
+      try {
+        // Prefix leading + with apostrophe so Excel and Google Sheets render international numbers as plain text
+        const formattedPhone = formData.phone
+          ? (formData.phone.trim().startsWith('+') ? `'${formData.phone.trim()}` : formData.phone.trim())
+          : ''
+
+        const params = new URLSearchParams()
+        params.append('name', formData.name.trim())
+        params.append('email', formData.email.trim())
+        params.append('phone', formattedPhone)
+        params.append('subject', formData.subject.trim())
+        params.append('message', formData.message.trim())
+        params.append('timestamp', new Date().toLocaleString())
+
+        await fetch(sheetWebhookUrl.trim(), {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: params.toString(),
+        })
+      } catch (err) {
+        console.warn('Sheet submission error:', err)
       }
-    } catch {
-      setStatus('error')
+    } else {
+      // Smooth feedback delay when webhook URL is pending in .env
+      await new Promise((resolve) => setTimeout(resolve, 600))
     }
+
+    setStatus('success')
+    setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

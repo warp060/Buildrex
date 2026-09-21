@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import HeroSection from '../components/HeroSection'
 import StatsSection from '../components/StatsSection'
 import DivisionsSection from '../components/DivisionsSection'
-import LeadershipSection from '../components/LeadershipSection'
 import CTASection from '../components/CTASection'
 
 export default function Home() {
@@ -15,7 +14,6 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
       <DivisionsSection />
-      <LeadershipSection />
       <CTASection />
     </>
   )

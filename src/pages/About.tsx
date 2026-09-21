@@ -31,7 +31,7 @@ const coreValues = [
   { icon: Star, title: 'Excellence', description: 'We hold ourselves to the highest standards in everything we do.' },
 ]
 
-const leadership = [
+const founders = [
   {
     title: 'Co-Founder & President',
     roleCategory: 'Vision & Governance',
@@ -44,6 +44,9 @@ const leadership = [
     image: '/team/ceo.jpg',
     status: 'active',
   },
+]
+
+const chiefs = [
   {
     title: 'Chief Operating Officer (COO)',
     roleCategory: 'Operations & Scaling',
@@ -52,10 +55,57 @@ const leadership = [
   },
 ]
 
+const LeadershipCard = ({ member, index }: { member: any; index: number }) => (
+  <ScrollReveal delay={index * 0.1} distance={20} className="h-full">
+    <div className="group relative rounded-3xl bg-white border border-navy-100/90 overflow-hidden card-hover-lift shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
+      {/* Photo Area */}
+      <div className="relative aspect-[4/5] overflow-hidden bg-navy-950">
+        <img
+          src={member.image}
+          alt={member.title}
+          className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-[#060D1A]/25 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+
+        {/* Active Status Badge */}
+        <div className="absolute top-4 right-4">
+          <span className="px-3 py-1 rounded-full bg-navy-950/80 backdrop-blur-md border border-white/15 text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
+            Council Member
+          </span>
+        </div>
+
+        {/* Overlaid Title on Photo */}
+        <div className="absolute bottom-5 left-5 right-5 text-left">
+          <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-cyan-400 block mb-1">
+            {member.roleCategory}
+          </span>
+          <h3 className="text-xl sm:text-2xl font-bold text-white font-[family-name:var(--font-heading)] leading-snug tracking-tight">
+            {member.title}
+          </h3>
+        </div>
+      </div>
+
+      {/* Bottom Card Bar */}
+      <div className="p-5 bg-white flex items-center justify-between border-t border-navy-100/70 mt-auto">
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg bg-navy-950 p-0.5 flex items-center justify-center shadow-xs">
+            <img src="/buildrex-emblem.png" alt="Buildrex" className="w-full h-full object-contain" />
+          </div>
+          <span className="text-xs font-semibold text-navy-900 tracking-tight">BUILDREX HQ</span>
+        </div>
+        <div className="flex items-center gap-1 text-xs font-semibold text-navy-600 group-hover:text-cyan-600 transition-colors">
+          <span>Executive Council</span>
+          <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </div>
+      </div>
+    </div>
+  </ScrollReveal>
+)
+
 const futurePositions = [
   { title: 'Chief Financial Officer (CFO)', status: 'upcoming' },
   { title: 'Chief Technology Officer (CTO)', status: 'upcoming' },
-  { title: 'Chief Marketing Officer (CMO)', status: 'upcoming' },
 ]
 
 export default function About() {
@@ -139,16 +189,14 @@ export default function About() {
 
             {timeline.map((item, index) => (
               <ScrollReveal key={index} delay={index * 0.15} direction={index % 2 === 0 ? 'left' : 'right'}>
-                <div className={`relative flex items-start gap-6 mb-12 last:mb-0 lg:gap-12 ${
-                  index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                }`}>
+                <div className={`relative flex items-start gap-6 mb-12 last:mb-0 lg:gap-12 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                  }`}>
                   {/* Dot */}
                   <div className="absolute left-6 lg:left-1/2 w-3 h-3 bg-navy-600 rounded-full -translate-x-1.5 mt-2 ring-4 ring-white shadow" />
-                  
+
                   {/* Card */}
-                  <div className={`ml-14 lg:ml-0 lg:w-[calc(50%-2rem)] ${
-                    index % 2 === 0 ? 'lg:text-right lg:pr-0' : 'lg:text-left lg:pl-0'
-                  }`}>
+                  <div className={`ml-14 lg:ml-0 lg:w-[calc(50%-2rem)] ${index % 2 === 0 ? 'lg:text-right lg:pr-0' : 'lg:text-left lg:pl-0'
+                    }`}>
                     <div className="p-6 rounded-xl border border-navy-100/90 bg-white shadow-sm card-hover-lift">
                       <h3 className="text-lg font-bold text-navy-900 font-[family-name:var(--font-heading)]">
                         {item.title}
@@ -251,53 +299,34 @@ export default function About() {
             </div>
           </ScrollReveal>
 
+          {/* Executive Board */}
+          <ScrollReveal>
+            <div className="text-center mb-10 mt-4">
+              <h3 className="text-2xl font-bold text-navy-900 font-[family-name:var(--font-heading)]">
+                Executive Board
+              </h3>
+            </div>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-8 mb-16">
+            {founders.map((member, index) => (
+              <LeadershipCard key={member.title} member={member} index={index} />
+            ))}
+          </div>
+
+          {/* Chief Officers */}
+          <ScrollReveal>
+            <div className="text-center mb-10">
+              <h3 className="text-2xl font-bold text-navy-900 font-[family-name:var(--font-heading)]">
+                Chief Officers
+              </h3>
+              <p className="mt-2 text-sm text-navy-900/60 max-w-lg mx-auto">
+                The key executives leading operations and scaling across all divisions.
+              </p>
+            </div>
+          </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {leadership.map((member, index) => (
-              <ScrollReveal key={index} delay={index * 0.1} distance={20}>
-                <div className="group relative rounded-3xl bg-white border border-navy-100/90 overflow-hidden card-hover-lift shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
-                  {/* Photo Area */}
-                  <div className="relative aspect-[4/5] overflow-hidden bg-navy-950">
-                    <img
-                      src={member.image}
-                      alt={member.title}
-                      className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-[#060D1A]/25 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
-
-                    {/* Active Status Badge */}
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 rounded-full bg-navy-950/80 backdrop-blur-md border border-white/15 text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
-                        Council Member
-                      </span>
-                    </div>
-
-                    {/* Overlaid Title on Photo */}
-                    <div className="absolute bottom-5 left-5 right-5 text-left">
-                      <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-cyan-400 block mb-1">
-                        {member.roleCategory}
-                      </span>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white font-[family-name:var(--font-heading)] leading-snug tracking-tight">
-                        {member.title}
-                      </h3>
-                    </div>
-                  </div>
-
-                  {/* Bottom Card Bar */}
-                  <div className="p-5 bg-white flex items-center justify-between border-t border-navy-100/70">
-                    <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-navy-950 p-0.5 flex items-center justify-center shadow-xs">
-                        <img src="/buildrex-emblem.png" alt="Buildrex" className="w-full h-full object-contain" />
-                      </div>
-                      <span className="text-xs font-semibold text-navy-900 tracking-tight">BUILDREX HQ</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-xs font-semibold text-navy-600 group-hover:text-cyan-600 transition-colors">
-                      <span>Executive Council</span>
-                      <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
+            {chiefs.map((member, index) => (
+              <LeadershipCard key={member.title} member={member} index={index} />
             ))}
           </div>
 
@@ -313,7 +342,7 @@ export default function About() {
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto gap-6">
             {futurePositions.map((pos, index) => (
               <ScrollReveal key={index} delay={index * 0.08} distance={14}>
                 <div className="p-6 rounded-2xl border border-dashed border-navy-200/90 bg-white/70 hover:bg-white text-center transition-colors">

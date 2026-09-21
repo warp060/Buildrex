@@ -7,7 +7,7 @@ const divisions = [
   {
     slug: 'tech',
     name: 'Buildrex Tech',
-    description: 'Technology, software, AI, websites and MVP development for startups and businesses.',
+    description: 'Cloud hosting, domain setup, AI chatbots, UI/UX dashboards, and startup technology solutions.',
     icon: Code2,
     color: 'from-cyan-500 to-blue-600',
     glow: 'group-hover:shadow-[0_0_30px_rgba(6,182,212,0.2)]',
