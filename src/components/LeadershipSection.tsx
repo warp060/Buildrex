@@ -4,16 +4,19 @@ import ScrollReveal from './ScrollReveal'
 
 const council = [
   {
+    name: 'V Md Tauseef Saleem',
     title: 'Co-Founder & President',
     category: 'Vision & Governance',
     image: '/team/president.jpg',
   },
   {
+    name: 'Shalu Priyadharshini',
     title: 'Co-Founder, Vice President & CEO',
     category: 'Strategy & Execution',
     image: '/team/ceo.jpg',
   },
   {
+    name: 'G Mohammed Ehsaan',
     title: 'Chief Operating Officer (COO)',
     category: 'Operations & Scaling',
     image: '/team/coo.jpg',
@@ -57,10 +60,10 @@ export default function LeadershipSection() {
                 <div className="relative aspect-[4/5] overflow-hidden bg-navy-950">
                   <img
                     src={member.image}
-                    alt={member.title}
+                    alt={member.name}
                     className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-[#060D1A]/20 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-[#060D1A]/35 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
 
                   {/* Active Indicator Badge */}
                   <div className="absolute top-4 right-4">
@@ -76,8 +79,11 @@ export default function LeadershipSection() {
                       {member.category}
                     </span>
                     <h3 className="text-xl sm:text-2xl font-bold text-white font-[family-name:var(--font-heading)] leading-snug tracking-tight">
-                      {member.title}
+                      {member.name}
                     </h3>
+                    <p className="text-xs sm:text-sm font-medium text-cyan-100/90 mt-1 leading-snug">
+                      {member.title}
+                    </p>
                   </div>
                 </div>
 

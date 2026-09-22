@@ -78,29 +78,6 @@ export default function HeroSection() {
             </Link>
           </motion.div>
         </div>
-
-        {/* Abstract tech element */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 animate-float"
-        >
-          <div className="relative w-80 h-80">
-            <div className="absolute inset-0 border border-navy-200/30 rounded-3xl rotate-12 transition-transform duration-700 hover:rotate-6" />
-            <div className="absolute inset-4 border border-navy-200/20 rounded-2xl -rotate-6 transition-transform duration-700 hover:-rotate-3" />
-            <div className="absolute inset-8 border border-navy-200/10 rounded-xl rotate-3" />
-            <div className="absolute inset-12 bg-gradient-to-br from-navy-100/40 to-navy-200/10 rounded-2xl backdrop-blur-sm shadow-inner" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 rounded-full p-1 bg-navy-950 shadow-2xl ring-2 ring-navy-400/30 transition-all duration-500 hover:scale-108 group">
-              <img
-                src="/buildrex-logo.png"
-                alt="Buildrex Official Logo"
-                className="w-full h-full object-cover rounded-full transition-transform duration-700 group-hover:rotate-6"
-              />
-              <div className="absolute -inset-3 rounded-full bg-gradient-to-r from-blue-600/25 via-cyan-500/25 to-purple-600/25 blur-xl -z-10 animate-pulse-glow" />
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   )

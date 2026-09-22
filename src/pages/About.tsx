@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Target, Eye, Heart, Shield, Lightbulb, Users, Zap, Star, ArrowUpRight, Sparkles } from 'lucide-react'
+import { Target, Eye, Heart, Shield, Lightbulb, Users, Zap, Star, Sparkles } from 'lucide-react'
 import ScrollReveal from '../components/ScrollReveal'
 
 const timeline = [
@@ -33,12 +33,14 @@ const coreValues = [
 
 const founders = [
   {
+    name: 'V Md Tauseef Saleem',
     title: 'Co-Founder & President',
     roleCategory: 'Vision & Governance',
     image: '/team/president.jpg',
     status: 'active',
   },
   {
+    name: 'Shalu Priyadharshini',
     title: 'Co-Founder, Vice President & CEO',
     roleCategory: 'Strategy & Execution',
     image: '/team/ceo.jpg',
@@ -48,6 +50,7 @@ const founders = [
 
 const chiefs = [
   {
+    name: 'G Mohammed Ehsaan',
     title: 'Chief Operating Officer (COO)',
     roleCategory: 'Operations & Scaling',
     image: '/team/coo.jpg',
@@ -55,34 +58,47 @@ const chiefs = [
   },
 ]
 
-const LeadershipCard = ({ member, index }: { member: any; index: number }) => (
+const LeadershipCard = ({
+  member,
+  index,
+  showCouncilBadge = true,
+}: {
+  member: any
+  index: number
+  showCouncilBadge?: boolean
+}) => (
   <ScrollReveal delay={index * 0.1} distance={20} className="h-full">
     <div className="group relative rounded-3xl bg-white border border-navy-100/90 overflow-hidden card-hover-lift shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
       {/* Photo Area */}
       <div className="relative aspect-[4/5] overflow-hidden bg-navy-950">
         <img
           src={member.image}
-          alt={member.title}
+          alt={member.name}
           className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-[#060D1A]/25 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060D1A] via-[#060D1A]/35 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
 
         {/* Active Status Badge */}
-        <div className="absolute top-4 right-4">
-          <span className="px-3 py-1 rounded-full bg-navy-950/80 backdrop-blur-md border border-white/15 text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
-            Council Member
-          </span>
-        </div>
+        {showCouncilBadge && (
+          <div className="absolute top-4 right-4">
+            <span className="px-3 py-1 rounded-full bg-navy-950/80 backdrop-blur-md border border-white/15 text-white text-xs font-semibold flex items-center gap-1.5 shadow-lg">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
+              Council Member
+            </span>
+          </div>
+        )}
 
-        {/* Overlaid Title on Photo */}
+        {/* Overlaid Name and Title on Photo */}
         <div className="absolute bottom-5 left-5 right-5 text-left">
           <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-cyan-400 block mb-1">
             {member.roleCategory}
           </span>
           <h3 className="text-xl sm:text-2xl font-bold text-white font-[family-name:var(--font-heading)] leading-snug tracking-tight">
-            {member.title}
+            {member.name}
           </h3>
+          <p className="text-xs sm:text-sm font-medium text-cyan-100/90 mt-1 leading-snug">
+            {member.title}
+          </p>
         </div>
       </div>
 
@@ -93,10 +109,6 @@ const LeadershipCard = ({ member, index }: { member: any; index: number }) => (
             <img src="/buildrex-emblem.png" alt="Buildrex" className="w-full h-full object-contain" />
           </div>
           <span className="text-xs font-semibold text-navy-900 tracking-tight">BUILDREX HQ</span>
-        </div>
-        <div className="flex items-center gap-1 text-xs font-semibold text-navy-600 group-hover:text-cyan-600 transition-colors">
-          <span>Executive Council</span>
-          <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </div>
       </div>
     </div>
@@ -309,7 +321,7 @@ export default function About() {
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-8 mb-16">
             {founders.map((member, index) => (
-              <LeadershipCard key={member.title} member={member} index={index} />
+              <LeadershipCard key={member.name} member={member} index={index} />
             ))}
           </div>
 
@@ -324,10 +336,12 @@ export default function About() {
               </p>
             </div>
           </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {chiefs.map((member, index) => (
-              <LeadershipCard key={member.title} member={member} index={index} />
-            ))}
+          <div className="flex justify-center mb-16">
+            <div className="w-full max-w-md">
+              {chiefs.map((member, index) => (
+                <LeadershipCard key={member.name} member={member} index={index} showCouncilBadge={false} />
+              ))}
+            </div>
           </div>
 
           {/* Upcoming Council Positions */}
